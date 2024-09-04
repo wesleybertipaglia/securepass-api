@@ -2,6 +2,8 @@ package com.wesleybertipaglia.securepass.controllers;
 
 import java.util.UUID;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.data.domain.Page;
@@ -28,7 +30,8 @@ public class PasswordController {
     private PasswordService passwordService;
 
     @PostMapping
-    public ResponseEntity<PasswordResponseRecord> createPassword(@RequestBody PasswordRequestRecord passwordRequest,
+    public ResponseEntity<PasswordResponseRecord> createPassword(
+            @Valid @RequestBody PasswordRequestRecord passwordRequest,
             JwtAuthenticationToken token) {
         return ResponseEntity.ok(passwordService.createPassword(passwordRequest, token.getName()));
     }
@@ -48,7 +51,7 @@ public class PasswordController {
 
     @PutMapping("/{id}")
     public ResponseEntity<PasswordResponseRecord> updatePassword(@PathVariable UUID id,
-            @RequestBody PasswordRequestRecord passwordRequest,
+            @Valid @RequestBody PasswordRequestRecord passwordRequest,
             JwtAuthenticationToken token) {
         return ResponseEntity.ok(passwordService.updatePassword(id, passwordRequest, token.getName()));
     }

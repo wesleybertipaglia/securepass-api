@@ -11,18 +11,20 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import org.springframework.hateoas.RepresentationModel;
+
 @Entity
 @Table(name = "passwords")
-public class Password {
+public class Password extends RepresentationModel<Password> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @NotBlank
+    @NotBlank(message = "Label cannot be blank")
     private String label;
 
-    @NotBlank
+    @NotBlank(message = "Password cannot be blank")
     private String password;
 
     @ManyToOne

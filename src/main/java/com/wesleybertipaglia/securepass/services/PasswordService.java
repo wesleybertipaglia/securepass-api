@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.AccessDeniedException;
 
 import com.wesleybertipaglia.securepass.entities.User;
+import com.wesleybertipaglia.securepass.mappers.PasswordMapper;
 import com.wesleybertipaglia.securepass.entities.Password;
 import com.wesleybertipaglia.securepass.repositories.PasswordRepository;
 import com.wesleybertipaglia.securepass.repositories.UserRepository;
@@ -32,19 +33,16 @@ public class PasswordService {
         User user = userRepository.findById(UUID.fromString(tokenSubject))
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
-        Password password = passwordRepository.save(
-                new Password(passwordRequest.label(), passwordRequest.password(), user));
-
-        return new PasswordResponseRecord(password.getId(), password.getLabel(),
-                password.getPassword());
+        Password password = passwordRepository.save(PasswordMapper.requestRecordToEntity(passwordRequest, user));
+        return PasswordMapper.entityToResponseRecord(password);
     }
 
     @Transactional(readOnly = true)
     public Page<PasswordResponseRecord> listPasswords(int page, int size, String tokenSubject) {
         Pageable pageable = PageRequest.of(page, size);
 
-        return passwordRepository.findAllByOwnerId(UUID.fromString(tokenSubject), pageable).map(
-                password -> new PasswordResponseRecord(password.getId(), password.getLabel(), password.getPassword()));
+        return passwordRepository.findAllByOwnerId(UUID.fromString(tokenSubject), pageable)
+                .map(PasswordMapper::entityToResponseRecord);
     }
 
     @Transactional(readOnly = true)
@@ -52,7 +50,7 @@ public class PasswordService {
         Password password = passwordRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Password not found"));
 
-        return new PasswordResponseRecord(password.getId(), password.getLabel(), password.getPassword());
+        return PasswordMapper.entityToResponseRecord(password);
     }
 
     @Transactional
@@ -63,16 +61,14 @@ public class PasswordService {
         if (!password.getOwner().getId().equals(UUID.fromString(tokenSubject))) {
             throw new AccessDeniedException("You are not allowed to update this password");
         }
-
         if (passwordRequest.label() != null) {
             password.setLabel(passwordRequest.label());
         }
-
         if (passwordRequest.password() != null) {
             password.setPassword(passwordRequest.password());
         }
 
-        return new PasswordResponseRecord(password.getId(), password.getLabel(), password.getPassword());
+        return PasswordMapper.entityToResponseRecord(passwordRepository.save(password));
     }
 
     @Transactional
