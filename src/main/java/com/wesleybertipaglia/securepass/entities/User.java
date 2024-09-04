@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.hateoas.RepresentationModel;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -17,13 +18,16 @@ public class User extends RepresentationModel<User> {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false)
+    @NotBlank(message = "Name cannot be blank")
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @NotBlank(message = "Email cannot be blank")
+    @Email(message = "Email must be valid")
+    @Size(max = 100, message = "Email must be less than 100 characters")
+    @Column(unique = true)
     private String email;
 
-    @Column(nullable = false)
+    @NotBlank(message = "Password cannot be blank")
     private String password;
 
     @CreationTimestamp

@@ -1,4 +1,7 @@
 package com.wesleybertipaglia.securepass.records.checker;
 
-public record PasswordCheckerRequestRecord(String password) {
+import jakarta.validation.constraints.NotBlank;
+
+public record PasswordCheckerRequestRecord(
+        @NotBlank(message = "Password cannot be blank") String password) {
 }
