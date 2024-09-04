@@ -14,26 +14,43 @@ It's my implementation of the Password Generator and Password Checker challenges
 
 ## Features
 
-The application includes the following functionalities:
+Secure Pass offers the following functionalities:
 
-- Password Generator
-- Password Checker
-- Password Storage
+- **Password Generator**: Create strong, random passwords.
+- **Password Checker**: Validate the strength and security of passwords.
+- **Password Storage**: Safely store and manage passwords.
 
 ## Getting Started
 
-**Prerequisites:**
-- Java 17 or later
-- Maven
+### 1. Create the `.env` File
 
-**Running with Maven:**
-```bash
-mvn spring-boot:run
-```
+- Create a `.env` file in the root directory using `.env.example` as a template.
+- Edit the `.env` file to set the required environment variables.
 
-**Accessing the application:**
-- API: [http://localhost:8080](http://localhost:8080)
-- API Documentation (Swagger): [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+### 2. Running the Application
+
+#### Option 1: Using Docker
+
+1. Ensure Docker and Docker Compose are installed.
+2. Run the following command to start the application:
+
+    ```bash
+    docker-compose up
+    ```
+
+#### Option 2: Using Maven
+
+1. Ensure Java 11, Maven, and PostgreSQL are installed.
+2. Run the application with:
+
+    ```bash
+    mvn spring-boot:run
+    ```
+
+### 3. Accessing the Application
+
+- **API Endpoint**: [http://localhost:8080](http://localhost:8080)
+- **API Documentation (Swagger)**: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 
 ## Entities
 
