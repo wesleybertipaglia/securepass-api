@@ -35,3 +35,7 @@ build/
 ### Keys ###
 *.pub
 *.key
+
+### ENV ###
+*.env
+*.env.development

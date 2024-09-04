@@ -1,0 +1,4 @@
+services:
+  securepass-api:
+    env_file:
+      - .env.development
