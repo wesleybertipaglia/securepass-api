@@ -8,6 +8,8 @@ import jakarta.validation.constraints.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "passwords")
@@ -23,6 +25,11 @@ public class Password {
     @NotBlank
     private String password;
 
+    @ManyToOne
+    @JoinColumn(name = "owner_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private User owner;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 
@@ -32,15 +39,17 @@ public class Password {
     public Password() {
     }
 
-    public Password(@NotBlank String label, @NotBlank String password) {
+    public Password(String label, String password, User owner) {
         this.label = label;
         this.password = password;
+        this.owner = owner;
     }
 
-    public Password(UUID id, @NotBlank String label, @NotBlank String password) {
+    public Password(UUID id, String label, String password, User owner) {
         this.id = id;
         this.label = label;
         this.password = password;
+        this.owner = owner;
     }
 
     public UUID getId() {
@@ -65,6 +74,14 @@ public class Password {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public LocalDateTime getCreatedAt() {
