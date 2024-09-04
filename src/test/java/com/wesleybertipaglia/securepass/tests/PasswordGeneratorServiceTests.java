@@ -1,9 +1,8 @@
-package com.wesleybertipaglia.securepass.utils;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+package com.wesleybertipaglia.securepass.tests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.wesleybertipaglia.securepass.records.generator.PasswordGeneratorResponseRecord;
 import com.wesleybertipaglia.securepass.services.PasswordGeneratorService;
@@ -12,7 +11,7 @@ public class PasswordGeneratorServiceTests {
     private PasswordGeneratorService passwordGeneratorService;
 
     @BeforeEach
-    public void setUp() {
+    public void setup() {
         passwordGeneratorService = new PasswordGeneratorService();
     }
 

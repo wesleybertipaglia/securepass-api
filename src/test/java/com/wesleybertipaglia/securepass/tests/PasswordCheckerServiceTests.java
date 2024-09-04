@@ -1,9 +1,8 @@
-package com.wesleybertipaglia.securepass.utils;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+package com.wesleybertipaglia.securepass.tests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.wesleybertipaglia.securepass.records.checker.PasswordCheckerRequestRecord;
 import com.wesleybertipaglia.securepass.records.checker.PasswordCheckerResponseRecord;
@@ -13,7 +12,7 @@ public class PasswordCheckerServiceTests {
     private PasswordCheckerService passwordCheckerService;
 
     @BeforeEach
-    public void setUp() {
+    public void setup() {
         passwordCheckerService = new PasswordCheckerService();
     }
 
