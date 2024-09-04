@@ -22,16 +22,16 @@ The application includes the following functionalities:
 
 ## Getting Started
 
-1. Prerequisites
+**Prerequisites:**
 - Java 17 or later
 - Maven
 
-2. Running with Maven
+**Running with Maven:**
 ```bash
 mvn spring-boot:run
 ```
 
-3. Accessing the application
+**Accessing the application:**
 - API: [http://localhost:8080](http://localhost:8080)
 - API Documentation (Swagger): [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 
