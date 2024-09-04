@@ -1,4 +1,4 @@
-package com.wesleybertipaglia.securepass.generator;
+package com.wesleybertipaglia.securepass.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
