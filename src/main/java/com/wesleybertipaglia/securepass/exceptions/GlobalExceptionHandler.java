@@ -1,4 +1,4 @@
-package com.wesleybertipaglia.events.exceptions;
+package com.wesleybertipaglia.securepass.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
