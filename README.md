@@ -22,12 +22,19 @@ Secure Pass offers the following functionalities:
 
 ## Getting Started
 
-### 1. Create the `.env` File
+### 1. Generating `app.key` and `app.pub`:
+
+```bash
+openssl genrsa -out src/main/resources/app.key 2048 
+openssl rsa -in src/main/resources/app.key -pubout -out src/main/resources/app.pub
+```
+
+### 2. Create the `.env` File
 
 - Create a `.env` file in the root directory using `.env.example` as a template.
 - Edit the `.env` file to set the required environment variables.
 
-### 2. Running the Application
+### 3. Running the Application
 
 #### Option 1: Using Docker
 
@@ -47,7 +54,7 @@ Secure Pass offers the following functionalities:
     mvn spring-boot:run
     ```
 
-### 3. Accessing the Application
+### 4. Accessing the Application
 
 - **API Endpoint**: [http://localhost:8080](http://localhost:8080)
 - **API Documentation (Swagger)**: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
