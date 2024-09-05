@@ -1,4 +1,4 @@
-package com.wesleybertipaglia.securepass.tests;
+package com.wesleybertipaglia.securepass.tests.services;
 
 import java.util.UUID;
 import java.util.Optional;

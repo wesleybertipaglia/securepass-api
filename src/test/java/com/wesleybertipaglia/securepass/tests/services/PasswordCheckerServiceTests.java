@@ -1,4 +1,4 @@
-package com.wesleybertipaglia.securepass.tests;
+package com.wesleybertipaglia.securepass.tests.services;
 
 import java.util.ArrayList;
 import java.util.List;

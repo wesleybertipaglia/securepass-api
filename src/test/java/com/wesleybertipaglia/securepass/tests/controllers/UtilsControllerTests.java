@@ -1,4 +1,4 @@
-package com.wesleybertipaglia.securepass.tests;
+package com.wesleybertipaglia.securepass.tests.controllers;
 
 import java.util.List;
 

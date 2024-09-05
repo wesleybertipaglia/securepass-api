@@ -1,4 +1,4 @@
-package com.wesleybertipaglia.securepass.tests;
+package com.wesleybertipaglia.securepass.tests.services;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
