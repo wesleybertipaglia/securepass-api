@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UppercaseValidation implements ValidationStrategy {
+public class UppercaseValidation implements ValidationStrategyInterface {
 
     @Override
     public void validate(String password, List<String> suggestions) {

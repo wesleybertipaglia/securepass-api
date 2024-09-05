@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.wesleybertipaglia.securepass.records.checker.PasswordCheckerRequestRecord;
 import com.wesleybertipaglia.securepass.records.checker.PasswordCheckerResponseRecord;
-import com.wesleybertipaglia.securepass.services.PasswordCheckerService;
+import com.wesleybertipaglia.securepass.services.checker.PasswordCheckerService;
 
 public class PasswordCheckerServiceTests {
     private PasswordCheckerService passwordCheckerService;

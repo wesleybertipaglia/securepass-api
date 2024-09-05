@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
-public class NumberValidation implements ValidationStrategy {
+public class NumberValidation implements ValidationStrategyInterface {
 
     @Override
     public void validate(String password, List<String> suggestions) {

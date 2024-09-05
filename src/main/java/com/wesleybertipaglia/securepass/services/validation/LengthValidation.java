@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
-public class LengthValidation implements ValidationStrategy {
+public class LengthValidation implements ValidationStrategyInterface {
     private static final int MIN_LENGTH = 8;
 
     @Override
