@@ -24,7 +24,7 @@ import com.wesleybertipaglia.securepass.records.password.PasswordRequestRecord;
 import com.wesleybertipaglia.securepass.records.password.PasswordResponseRecord;
 import com.wesleybertipaglia.securepass.services.password.PasswordService;
 
-public class PasswordControllerTests {
+public class PasswordControllerUnitTests {
 
     @Mock
     private PasswordService passwordService;
