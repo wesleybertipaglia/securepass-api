@@ -31,7 +31,7 @@ import com.wesleybertipaglia.securepass.services.generator.PasswordGeneratorServ
 
 @WebMvcTest(UtilsController.class)
 @Import(SecurityConfig.class)
-public class UtilsControllerTests {
+public class UtilsControllerIntegratedTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -51,11 +51,13 @@ public class UtilsControllerTests {
 
     @Test
     void shouldCheckPassword() throws Exception {
+        // arrange
         PasswordCheckerRequestRecord request = new PasswordCheckerRequestRecord("password123");
         PasswordCheckerResponseRecord response = new PasswordCheckerResponseRecord("Strong", List.of());
 
         when(passwordCheckerService.checkPassword(request)).thenReturn(response);
 
+        // act & assert
         mockMvc.perform(post("/utils/checker")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(request)))
@@ -66,11 +68,14 @@ public class UtilsControllerTests {
 
     @Test
     void shouldGeneratePassword() throws Exception {
-        PasswordGeneratorResponseRecord response = new PasswordGeneratorResponseRecord("generatedPassword",
+        // arrange
+        PasswordGeneratorResponseRecord response = new PasswordGeneratorResponseRecord(
+                "generatedPassword",
                 new PasswordGeneratorResponseRecord.GenerationProperties(12, true, true, true, true));
 
         when(passwordGeneratorService.generatePassword(12, true, true, true, true)).thenReturn(response);
 
+        // act & assert
         mockMvc.perform(get("/utils/generator")
                 .param("length", "12")
                 .param("uppercase", "true")
@@ -85,4 +90,5 @@ public class UtilsControllerTests {
                 .andExpect(jsonPath("$.properties.numbers", is(true)))
                 .andExpect(jsonPath("$.properties.special", is(true)));
     }
+
 }
