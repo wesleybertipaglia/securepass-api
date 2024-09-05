@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.wesleybertipaglia.securepass.services.AuthService;
 import com.wesleybertipaglia.securepass.records.auth.SignInRequestRecord;
 import com.wesleybertipaglia.securepass.records.auth.SignInResponseRecord;
 import com.wesleybertipaglia.securepass.records.auth.SignUpRequestRecord;
 import com.wesleybertipaglia.securepass.records.auth.SignUpResponseRecord;
+import com.wesleybertipaglia.securepass.services.auth.AuthService;
 
 @RestController
 @RequestMapping("/auth")

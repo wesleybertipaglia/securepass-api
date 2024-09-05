@@ -1,4 +1,4 @@
-package com.wesleybertipaglia.securepass.services;
+package com.wesleybertipaglia.securepass.services.auth;
 
 import java.time.Instant;
 
