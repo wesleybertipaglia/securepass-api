@@ -10,7 +10,6 @@
 - [ ] Test coverage with JaCoCo
 
 ### Infrastructure
-- [ ] Create a CI/CD pipeline with GitHub Actions to run tests
 - [ ] Implement a monitoring system with Spring Boot Actuator
 - [ ] Database backup routines
 
@@ -30,3 +29,4 @@
 - [x] Separated environments for tests, development and production
 - [x] Logging with logback
 - [x] Add indexes to database
+- [x] Create a CI/CD pipeline with GitHub Actions to run tests
