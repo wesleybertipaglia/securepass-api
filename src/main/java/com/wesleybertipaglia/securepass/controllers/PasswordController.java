@@ -45,8 +45,8 @@ public class PasswordController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PasswordResponseRecord> getPassword(@PathVariable UUID id) {
-        return ResponseEntity.ok(passwordService.getPassword(id));
+    public ResponseEntity<PasswordResponseRecord> getPassword(@PathVariable UUID id, JwtAuthenticationToken token) {
+        return ResponseEntity.ok(passwordService.getPassword(id, token.getName()));
     }
 
     @PutMapping("/{id}")

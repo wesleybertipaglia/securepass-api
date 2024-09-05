@@ -21,7 +21,7 @@ import com.wesleybertipaglia.securepass.records.password.PasswordRequestRecord;
 import com.wesleybertipaglia.securepass.records.password.PasswordResponseRecord;
 
 @Service
-public class PasswordService {
+public class PasswordService implements PasswordServiceInterface {
     @Autowired
     private PasswordRepository passwordRepository;
 
@@ -46,8 +46,8 @@ public class PasswordService {
     }
 
     @Transactional(readOnly = true)
-    public PasswordResponseRecord getPassword(UUID id) {
-        Password password = passwordRepository.findById(id)
+    public PasswordResponseRecord getPassword(UUID id, String tokenSubject) {
+        Password password = passwordRepository.findByIdAndOwnerId(id, UUID.fromString(tokenSubject))
                 .orElseThrow(() -> new EntityNotFoundException("Password not found"));
 
         return PasswordMapper.entityToResponseRecord(password);
