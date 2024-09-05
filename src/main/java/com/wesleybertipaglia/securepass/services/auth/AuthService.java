@@ -20,7 +20,7 @@ import com.wesleybertipaglia.securepass.records.auth.SignUpRequestRecord;
 import com.wesleybertipaglia.securepass.records.auth.SignUpResponseRecord;
 
 @Service
-public class AuthService {
+public class AuthService implements AuthServiceInterface {
     @Autowired
     private UserRepository userRepository;
 
