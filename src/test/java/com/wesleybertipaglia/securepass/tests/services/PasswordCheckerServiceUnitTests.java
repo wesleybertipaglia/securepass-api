@@ -1,8 +1,5 @@
 package com.wesleybertipaglia.securepass.tests.services;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +12,10 @@ import com.wesleybertipaglia.securepass.records.checker.PasswordCheckerResponseR
 import com.wesleybertipaglia.securepass.services.checker.PasswordCheckerService;
 import com.wesleybertipaglia.securepass.services.validation.*;
 
-public class PasswordCheckerServiceTests {
+import java.lang.reflect.Field;
+import java.util.List;
+
+public class PasswordCheckerServiceUnitTests {
 
     @InjectMocks
     private PasswordCheckerService passwordCheckerService;
@@ -24,49 +24,64 @@ public class PasswordCheckerServiceTests {
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        List<ValidationStrategyInterface> strategies = new ArrayList<>();
-        strategies.add(new LengthValidation());
-        strategies.add(new LowercaseValidation());
-        strategies.add(new UppercaseValidation());
-        strategies.add(new NumberValidation());
-        strategies.add(new SpecialCharacterValidation());
-
-        injectValidationStrategies(passwordCheckerService, strategies);
+        // inject validation strategies into the service
+        injectValidationStrategies();
     }
 
-    private void injectValidationStrategies(PasswordCheckerService service,
-            List<ValidationStrategyInterface> strategies) {
+    // inject validation strategies into PasswordCheckerService
+    private void injectValidationStrategies() {
+        List<ValidationStrategyInterface> strategies = List.of(
+                new LengthValidation(),
+                new LowercaseValidation(),
+                new UppercaseValidation(),
+                new NumberValidation(),
+                new SpecialCharacterValidation());
+
         try {
-            var field = PasswordCheckerService.class.getDeclaredField("validationStrategies");
+            Field field = PasswordCheckerService.class.getDeclaredField("validationStrategies");
             field.setAccessible(true);
-            field.set(service, strategies);
+            field.set(passwordCheckerService, strategies);
         } catch (NoSuchFieldException | IllegalAccessException e) {
-            throw new RuntimeException("Falha ao injetar validationStrategies", e);
+            throw new RuntimeException("Failed to inject validation strategies", e);
         }
     }
 
     @Test
     void shouldReturnWeakPassword() {
+        // arrange
         PasswordCheckerRequestRecord request = new PasswordCheckerRequestRecord("short");
+
+        // act
         PasswordCheckerResponseRecord response = passwordCheckerService.checkPassword(request);
-        assertEquals("Weak", response.strength());
-        assertEquals(4, response.suggestions().size());
+
+        // assert
+        assertEquals("Weak", response.strength(), "Expected password strength to be Weak");
+        assertEquals(4, response.suggestions().size(), "Expected 4 suggestions for a weak password");
     }
 
     @Test
     void shouldReturnMediumPassword() {
+        // arrange
         PasswordCheckerRequestRecord request = new PasswordCheckerRequestRecord("Strong!Password");
+
+        // act
         PasswordCheckerResponseRecord response = passwordCheckerService.checkPassword(request);
-        assertEquals("Medium", response.strength());
-        assertEquals(1, response.suggestions().size());
+
+        // assert
+        assertEquals("Medium", response.strength(), "Expected password strength to be Medium");
+        assertEquals(1, response.suggestions().size(), "Expected 1 suggestion for a medium password");
     }
 
     @Test
     void shouldReturnStrongPassword() {
+        // arrange
         PasswordCheckerRequestRecord request = new PasswordCheckerRequestRecord("Str0ng!Password");
-        PasswordCheckerResponseRecord response = passwordCheckerService.checkPassword(request);
-        assertEquals("Strong", response.strength());
-        assertEquals(0, response.suggestions().size());
-    }
 
+        // act
+        PasswordCheckerResponseRecord response = passwordCheckerService.checkPassword(request);
+
+        // assert
+        assertEquals("Strong", response.strength(), "Expected password strength to be Strong");
+        assertEquals(0, response.suggestions().size(), "Expected no suggestions for a strong password");
+    }
 }
