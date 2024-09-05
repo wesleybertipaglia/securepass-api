@@ -12,7 +12,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", indexes = {
+        @Index(name = "idx_user_email", columnList = "email"),
+        @Index(name = "idx_user_name", columnList = "name")
+})
 public class User extends RepresentationModel<User> {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

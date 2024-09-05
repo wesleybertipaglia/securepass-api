@@ -13,7 +13,6 @@
 ### Infrastructure
 - [ ] Create a CI/CD pipeline with GitHub Actions to run tests
 - [ ] Implement a monitoring system with Spring Boot Actuator
-- [ ] Add indexes to database
 - [ ] Database backup routines
 
 ## Done
@@ -30,3 +29,4 @@
 - [x] Health checkers for docker containers
 - [x] Separated environments for tests, development and production
 - [x] Logging with logback
+- [x] Add indexes to database

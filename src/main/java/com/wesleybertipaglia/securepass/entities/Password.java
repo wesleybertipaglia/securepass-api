@@ -14,7 +14,10 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.hateoas.RepresentationModel;
 
 @Entity
-@Table(name = "passwords")
+@Table(name = "passwords", indexes = {
+        @Index(name = "idx_password_label", columnList = "label"),
+        @Index(name = "idx_password_owner_id", columnList = "owner_id")
+})
 public class Password extends RepresentationModel<Password> {
 
     @Id
