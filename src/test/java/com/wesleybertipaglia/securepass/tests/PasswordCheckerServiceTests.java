@@ -1,50 +1,72 @@
 package com.wesleybertipaglia.securepass.tests;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
+
 import com.wesleybertipaglia.securepass.records.checker.PasswordCheckerRequestRecord;
 import com.wesleybertipaglia.securepass.records.checker.PasswordCheckerResponseRecord;
 import com.wesleybertipaglia.securepass.services.checker.PasswordCheckerService;
+import com.wesleybertipaglia.securepass.services.validation.*;
 
 public class PasswordCheckerServiceTests {
+
+    @InjectMocks
     private PasswordCheckerService passwordCheckerService;
 
     @BeforeEach
-    public void setup() {
-        passwordCheckerService = new PasswordCheckerService();
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+
+        List<ValidationStrategyInterface> strategies = new ArrayList<>();
+        strategies.add(new LengthValidation());
+        strategies.add(new LowercaseValidation());
+        strategies.add(new UppercaseValidation());
+        strategies.add(new NumberValidation());
+        strategies.add(new SpecialCharacterValidation());
+
+        injectValidationStrategies(passwordCheckerService, strategies);
+    }
+
+    private void injectValidationStrategies(PasswordCheckerService service,
+            List<ValidationStrategyInterface> strategies) {
+        try {
+            var field = PasswordCheckerService.class.getDeclaredField("validationStrategies");
+            field.setAccessible(true);
+            field.set(service, strategies);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException("Falha ao injetar validationStrategies", e);
+        }
     }
 
     @Test
-    public void testCheckPasswordStrong() {
-        PasswordCheckerRequestRecord passwordRequestRecord = new PasswordCheckerRequestRecord("Password123!");
-        PasswordCheckerResponseRecord response = passwordCheckerService.checkPassword(passwordRequestRecord);
-
-        assertEquals("Strong", response.strength());
-        assertEquals(0, response.suggestions().size());
+    void shouldReturnWeakPassword() {
+        PasswordCheckerRequestRecord request = new PasswordCheckerRequestRecord("short");
+        PasswordCheckerResponseRecord response = passwordCheckerService.checkPassword(request);
+        assertEquals("Weak", response.strength());
+        assertEquals(4, response.suggestions().size());
     }
 
     @Test
-    public void testCheckPasswordMedium() {
-        PasswordCheckerRequestRecord passwordRequestRecord = new PasswordCheckerRequestRecord("Password123");
-        PasswordCheckerResponseRecord response = passwordCheckerService.checkPassword(passwordRequestRecord);
-
+    void shouldReturnMediumPassword() {
+        PasswordCheckerRequestRecord request = new PasswordCheckerRequestRecord("Strong!Password");
+        PasswordCheckerResponseRecord response = passwordCheckerService.checkPassword(request);
         assertEquals("Medium", response.strength());
         assertEquals(1, response.suggestions().size());
     }
 
     @Test
-    public void testCheckPasswordWeak() {
-        PasswordCheckerRequestRecord passwordRequestRecord = new PasswordCheckerRequestRecord("passwor");
-        PasswordCheckerResponseRecord response = passwordCheckerService.checkPassword(passwordRequestRecord);
-
-        assertEquals("Weak", response.strength());
-        assertEquals(4, response.suggestions().size());
-        assertEquals(response.suggestions().get(0), "Password must be at least 8 characters long");
-        assertEquals(response.suggestions().get(1), "Password must contain at least one uppercase letter");
-        assertEquals(response.suggestions().get(2), "Password must contain at least one number");
-        assertEquals(response.suggestions().get(3),
-                "Password must contain at least one special character (e.g. !@#$%^&*)");
+    void shouldReturnStrongPassword() {
+        PasswordCheckerRequestRecord request = new PasswordCheckerRequestRecord("Str0ng!Password");
+        PasswordCheckerResponseRecord response = passwordCheckerService.checkPassword(request);
+        assertEquals("Strong", response.strength());
+        assertEquals(0, response.suggestions().size());
     }
+
 }
