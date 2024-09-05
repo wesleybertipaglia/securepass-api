@@ -6,15 +6,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
+
 import com.wesleybertipaglia.securepass.records.generator.PasswordGeneratorResponseRecord;
 import com.wesleybertipaglia.securepass.services.generator.PasswordGeneratorService;
 
 public class PasswordGeneratorServiceTests {
+
+    @InjectMocks
     private PasswordGeneratorService passwordGeneratorService;
 
     @BeforeEach
     void setUp() {
-        passwordGeneratorService = new PasswordGeneratorService();
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
