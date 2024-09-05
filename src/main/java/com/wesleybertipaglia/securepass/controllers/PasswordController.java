@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wesleybertipaglia.securepass.services.PasswordService;
 import com.wesleybertipaglia.securepass.records.password.PasswordRequestRecord;
 import com.wesleybertipaglia.securepass.records.password.PasswordResponseRecord;
+import com.wesleybertipaglia.securepass.services.password.PasswordService;
 
 @RestController
 @RequestMapping("/passwords")

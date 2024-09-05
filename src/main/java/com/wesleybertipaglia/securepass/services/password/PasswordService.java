@@ -1,4 +1,4 @@
-package com.wesleybertipaglia.securepass.services;
+package com.wesleybertipaglia.securepass.services.password;
 
 import java.util.UUID;
 
