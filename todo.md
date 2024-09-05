@@ -5,7 +5,7 @@
 ### Application
 - [ ] Add rate limit to API
 - [ ] Add cache to API
-- [ ] Refactor services (1/4) and controllers
+- [ ] Refactor services (2/4) and controllers
 - [ ] Apply principles (SOLID, Clean Code, Clean Architecture)
 - [ ] Automated tests with JUnit and Mockito (services and controllers)
 - [ ] Test coverage with JaCoCo
