@@ -1,6 +1,7 @@
 package com.wesleybertipaglia.securepass.services.auth;
 
 import java.time.Instant;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,13 @@ public class AuthService {
 
         userRepository.save(user);
         return new SignUpResponseRecord(user.getName(), user.getEmail());
+    }
+
+    @Transactional
+    public void deleteAccount(String tokenSubject) {
+        User user = userRepository.findById(UUID.fromString(tokenSubject)).orElseThrow(
+                () -> new BadCredentialsException("Account not found."));
+        userRepository.delete(user);
     }
 
 }

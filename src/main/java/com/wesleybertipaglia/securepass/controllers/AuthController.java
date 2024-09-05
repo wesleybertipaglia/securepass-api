@@ -1,8 +1,10 @@
 package com.wesleybertipaglia.securepass.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -27,6 +29,11 @@ public class AuthController {
     @PostMapping("/signup")
     public SignUpResponseRecord signup(@RequestBody SignUpRequestRecord signUpRequest) {
         return authService.signUp(signUpRequest);
+    }
+
+    @DeleteMapping("/delete")
+    public void delete(JwtAuthenticationToken token) {
+        authService.deleteAccount(token.getName());
     }
 
 }
