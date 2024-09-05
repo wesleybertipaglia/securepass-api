@@ -47,7 +47,7 @@ openssl rsa -in src/main/resources/app.key -pubout -out src/main/resources/app.p
 
 #### Option 2: Using Maven
 
-1. Ensure Java 11, Maven, and PostgreSQL are installed.
+1. Ensure Java 17 or latter, Maven, and PostgreSQL are installed.
 2. Run the application with:
 
     ```bash
