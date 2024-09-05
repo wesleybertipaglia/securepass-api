@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wesleybertipaglia.securepass.services.checker.PasswordCheckerService;
-import com.wesleybertipaglia.securepass.services.PasswordGeneratorService;
+import com.wesleybertipaglia.securepass.services.generator.PasswordGeneratorService;
 import com.wesleybertipaglia.securepass.records.checker.PasswordCheckerRequestRecord;
 import com.wesleybertipaglia.securepass.records.checker.PasswordCheckerResponseRecord;
 import com.wesleybertipaglia.securepass.records.generator.PasswordGeneratorResponseRecord;

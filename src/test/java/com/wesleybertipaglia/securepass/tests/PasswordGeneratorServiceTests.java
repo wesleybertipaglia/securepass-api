@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.wesleybertipaglia.securepass.records.generator.PasswordGeneratorResponseRecord;
-import com.wesleybertipaglia.securepass.services.PasswordGeneratorService;
+import com.wesleybertipaglia.securepass.services.generator.PasswordGeneratorService;
 
 public class PasswordGeneratorServiceTests {
     private PasswordGeneratorService passwordGeneratorService;
