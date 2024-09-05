@@ -11,7 +11,7 @@ import com.wesleybertipaglia.securepass.records.checker.PasswordCheckerRequestRe
 import com.wesleybertipaglia.securepass.records.checker.PasswordCheckerResponseRecord;
 
 @Service
-public class PasswordCheckerService {
+public class PasswordCheckerService implements PasswordCheckerServiceInterface {
 
     @Autowired
     private List<ValidationStrategyInterface> validationStrategies;
