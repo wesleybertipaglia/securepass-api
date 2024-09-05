@@ -16,20 +16,20 @@ public class PasswordGeneratorService implements PasswordGeneratorServiceInterfa
 
     private final SecureRandom random = new SecureRandom();
 
-    public PasswordGeneratorResponseRecord generatePassword(int length, boolean includeUppercase,
+    public PasswordGeneratorResponseRecord generatePassword(int passwordLength, boolean includeUppercase,
             boolean includeLowercase, boolean includeNumbers, boolean includeSpecial) {
-        validateLength(length);
+        validateLength(passwordLength);
         String characterSet = buildCharacterSet(includeUppercase, includeLowercase, includeNumbers, includeSpecial);
         validateCharacterSet(characterSet);
 
-        String password = generateRandomPassword(length, characterSet);
+        String password = generateRandomPassword(passwordLength, characterSet);
         PasswordGeneratorResponseRecord.GenerationProperties properties = new PasswordGeneratorResponseRecord.GenerationProperties(
-                length, includeUppercase, includeLowercase, includeNumbers, includeSpecial);
+                passwordLength, includeUppercase, includeLowercase, includeNumbers, includeSpecial);
         return new PasswordGeneratorResponseRecord(password, properties);
     }
 
-    private void validateLength(int length) {
-        if (length <= 0) {
+    private void validateLength(int passwordLength) {
+        if (passwordLength <= 0) {
             throw new IllegalArgumentException("Password length must be greater than zero");
         }
     }
@@ -54,9 +54,9 @@ public class PasswordGeneratorService implements PasswordGeneratorServiceInterfa
         }
     }
 
-    private String generateRandomPassword(int length, String characterSet) {
-        StringBuilder password = new StringBuilder(length);
-        for (int i = 0; i < length; i++) {
+    private String generateRandomPassword(int passwordLength, String characterSet) {
+        StringBuilder password = new StringBuilder(passwordLength);
+        for (int i = 0; i < passwordLength; i++) {
             password.append(characterSet.charAt(random.nextInt(characterSet.length())));
         }
         return password.toString();
