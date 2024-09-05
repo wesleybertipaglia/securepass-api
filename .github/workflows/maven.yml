@@ -37,4 +37,4 @@ jobs:
         run: mvn clean install --fail-never
 
       - name: Run tests with Maven
-        run: mvn test --fail-never
+        run: mvn test -e --fail-never
