@@ -7,7 +7,6 @@
 - [ ] Add cache to API
 - [ ] Refactor services and controllers
 - [ ] Apply principles (SOLID, Clean Code, Clean Architecture)
-- [ ] Automated tests with JUnit and Mockito (services and controllers)
 - [ ] Test coverage with JaCoCo
 
 ### Infrastructure
@@ -23,6 +22,7 @@
 - [x] Global exception handling
 - [x] Validation with Jakarta Validation
 - [x] Use of Records to represent data
+- [x] Automated tests with JUnit and Mockito (services and controllers)
 
 ### Infrastructure
 - [x] Containers to build and run services
