@@ -56,7 +56,7 @@ public class PasswordService implements PasswordServiceInterface {
     @Transactional
     public PasswordResponseRecord updatePassword(UUID id, PasswordRequestRecord passwordRequest, String tokenSubject) {
         Password password = passwordRepository.findById(id)
-                .orElseThrow(() -> new AccessDeniedException("Password not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Password not found"));
 
         if (!password.getOwner().getId().equals(UUID.fromString(tokenSubject))) {
             throw new AccessDeniedException("You are not allowed to update this password");
