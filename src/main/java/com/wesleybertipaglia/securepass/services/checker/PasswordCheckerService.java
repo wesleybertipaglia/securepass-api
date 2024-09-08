@@ -18,14 +18,22 @@ public class PasswordCheckerService implements PasswordCheckerServiceInterface {
 
     public PasswordCheckerResponseRecord checkPassword(PasswordCheckerRequestRecord passwordCheckerRequestRecord) {
         String password = passwordCheckerRequestRecord.password();
-        List<String> suggestions = new ArrayList<>();
 
+        if (password.isBlank()) {
+            throw new IllegalArgumentException("Password cannot be blank");
+        }
+
+        List<String> suggestions = determineSuggestions(password);
+        String strength = determinePasswordStrength(password, suggestions);
+        return new PasswordCheckerResponseRecord(strength, suggestions);
+    }
+
+    private List<String> determineSuggestions(String password) {
+        List<String> suggestions = new ArrayList<>();
         for (ValidationStrategyInterface strategy : validationStrategies) {
             strategy.validate(password, suggestions);
         }
-
-        String strength = determinePasswordStrength(password, suggestions);
-        return new PasswordCheckerResponseRecord(strength, suggestions);
+        return  suggestions;
     }
 
     private String determinePasswordStrength(String password, List<String> suggestions) {
