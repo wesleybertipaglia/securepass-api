@@ -29,7 +29,6 @@ class AuthControllerTest {
     @Mock
     private AuthService authService;
 
-
     private static final UUID USER_ID = UUID.randomUUID();
     private static final String USER_NAME = "User Name";
     private static final String USER_EMAIL = "user@email.com";
